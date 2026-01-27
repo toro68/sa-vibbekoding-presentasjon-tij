@@ -471,9 +471,13 @@
         white-space: nowrap;
         border: 0;
       }
-          @keyframes fadeUp{
+      @keyframes fadeUp{
         from{opacity:0; transform: translateY(6px);}
         to{opacity:1; transform: translateY(0);}
+      }
+
+      @keyframes dash{
+        to{stroke-dashoffset:-220;}
       }
     </style>
   </head>
@@ -904,24 +908,19 @@
             <h1>Takk for meg</h1>
             <p class="subtitle">Spørsmål?</p>
           </header>
-          <div class="list">
-            <p class="note">Oppsummering: data → struktur → integrasjon. Iterer raskt, test på mobil.</p>
-            <p><a href="https://aftenbladet-editorial-sa-pptx-tij.pages.schibsted.ghe.com/presentasjon.html" target="_blank" rel="noopener">aftenbladet-editorial-sa-pptx-tij.pages.schibsted.ghe.com/presentasjon.html</a></p>
-            <div style="border:1px solid rgba(255,255,255,0.18);border-radius:10px;padding:14px;background:rgba(255,255,255,0.04)">
-              <p class="note" style="margin-top:0"><strong>Mini-demo:</strong> Slik ser «vibbekoding» ut i praksis</p>
+          <div class="list" style="text-align:center">
+            <div style="position:relative;height:280px;border-radius:14px;overflow:hidden;background:radial-gradient(900px 320px at 50% 120%, rgba(255,215,0,0.20), transparent 60%)">
+              <div style="position:absolute;left:50%;top:40px;transform:translateX(-50%);width:92px;height:3px;background:linear-gradient(90deg,#0a5bd3,#60a5fa);border-radius:2px"></div>
 
-              <div class="prompt" style="margin-bottom:10px">«Lag en rolig avslutningsside med tynn blå linje, tre takeaways og en lenke. Ikke stjel showet.»</div>
+              <svg aria-hidden="true" viewBox="0 0 1000 280" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+                <path d="M0 190 C 120 120, 240 220, 360 150 S 600 220, 760 150 S 920 210, 1000 140" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 12" style="animation:dash 2.8s linear infinite" />
+                <path d="M0 210 C 160 140, 300 240, 460 170 S 700 230, 860 170 S 940 220, 1000 160" fill="none" stroke="rgba(96,165,250,0.22)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 10" style="animation:dash 3.4s linear infinite" />
+              </svg>
 
-              <div style="display:flex;align-items:center;gap:10px;margin:10px 0 4px">
-                <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);font-size:0.9rem">Godkjenn</span>
-                <span class="note" style="margin:0">(små justeringer → nytt forslag → godkjenn igjen)</span>
+              <div style="position:absolute;left:50%;top:110px;transform:translateX(-50%);width:min(520px,86%);border:1px solid rgba(255,255,255,0.14);border-radius:12px;padding:14px;background:rgba(255,255,255,0.04)">
+                <p class="note" style="margin:0 0 8px"><strong>Prompt:</strong> Lag en animasjon som passer ift. gull konfetti på side 1.</p>
+                <div class="prompt" style="margin:0">«Lag en rolig, loopende animasjon som matcher uttrykket, uten å stjele showet.»</div>
               </div>
-
-              <ul class="takeaways" style="margin:10px 0 0">
-                <li style="opacity:0;animation:fadeUp 0.7s ease forwards;animation-delay:0.05s">Data → struktur → integrasjon</li>
-                <li style="opacity:0;animation:fadeUp 0.7s ease forwards;animation-delay:0.18s">Mobile-first</li>
-                <li style="opacity:0;animation:fadeUp 0.7s ease forwards;animation-delay:0.31s">Trykk «godkjenn», iterer</li>
-              </ul>
             </div>
           </div>
         </section>
