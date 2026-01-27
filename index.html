@@ -494,8 +494,8 @@
           <option value="11">12. Brønnøysund-data</option>
           <option value="12">13. Egen transkribent</option>
           <option value="13">14. Dagsorden-bot</option>
-          <option value="14">15. Vibbekoding (Tenor)</option>
-          <option value="15">16. Rutekutt</option>
+          <option value="14">15. Rutekutt</option>
+          <option value="15">16. Vibbekoding</option>
           <option value="16">17. Fra regneark til integrasjon</option>
           <option value="17">18. Hvilke verktøy?</option>
         </select>
@@ -796,6 +796,24 @@
 
 
 
+
+        <section class="page">
+          <header>
+            <h1>Rutekutt</h1>
+            <p class="subtitle">Fra regneark til integrasjon (inline HTML)</p>
+          </header>
+          <div class="list">
+            <img src="rutekutt.png" alt="Illustrasjon: rutekutt" style="width:100%;border-radius:6px" />
+            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/5aeb5d44-b217-4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/5aeb5d44-b217-4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene</a></p>
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Fra regneark til integrasjon (inline HTML):</strong> Fra regneark til ferdig integrasjon: KI hjelper med å strukturere data og generere ren HTML som kan limes rett inn i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
+            <p><strong>Data:</strong> Regneark (parti/vedtak/tall)</p>
+            <p><strong>Teknisk løsning:</strong> Regneark → KI rydder/standardiserer kolonner → genererer HTML (tabell/kort) med enkel CSS → HTML limes inn som inline HTML-integrasjon i mm.schibsted.media.</p>
+          </details>
+        </section>
+
         <section class="page">
           <header>
             <h1>Vibbekoding</h1>
@@ -823,21 +841,6 @@
           </details>
         </section>
 
-        <section class="page">
-          <header>
-            <h1>Rutekutt</h1>
-            <p class="subtitle">Fra regneark til integrasjon (inline HTML)</p>
-          </header>
-          <div class="list">
-            <p class="note">Fra regneark til ferdig integrasjon: KI hjelper med å strukturere data og generere ren HTML som kan limes rett inn i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
-            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/5aeb5d44-b217-4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/5aeb5d44-b217-4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene</a></p>
-          </div>
-          <details class="how-made">
-            <summary>🛠️ Slik ble denne siden laget</summary>
-            <p><strong>Data:</strong> Regneark (parti/vedtak/tall)</p>
-            <p><strong>Teknisk løsning:</strong> Regneark → KI rydder/standardiserer kolonner → genererer HTML (tabell/kort) med enkel CSS → HTML limes inn som inline HTML-integrasjon i mm.schibsted.media.</p>
-          </details>
-        </section>
 
         <section class="page big-title">
           <header>
@@ -864,9 +867,6 @@
             <p><strong>Publisering:</strong> HTML-en limes inn som inline HTML i <span title="mm.schibsted.media">mm.schibsted.media</span> og rendres direkte i artikkelen.</p>
           </details>
         </section>
-            </div>
-
-    </div>
 
         <section class="page">
           <header>
@@ -977,10 +977,6 @@
             e.preventDefault();
             show(pages.length - 1);
           }
-          if (e.key.toLowerCase() === 'm') {
-            e.preventDefault();
-            setMode(!document.body.classList.contains('deck-mode'));
-          }
           if (e.key.toLowerCase() === 'f') {
             e.preventDefault();
             if (!document.fullscreenElement) {
@@ -991,8 +987,6 @@
           }
         });
 
-        setMode(readMode());
-        setModeLabel();
         show(index);
       })();
     </script>
