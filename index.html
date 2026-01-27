@@ -479,7 +479,6 @@
       <div class="pager" aria-live="polite">
         <button type="button" id="prevBtn">Forrige</button>
         <button type="button" id="nextBtn">Neste</button>
-        <button type="button" id="modeBtn" title="Bytt mellom web og storskjerm">Storskjerm</button>
         <select id="pageSelect" class="page-select" aria-label="Velg side">
           <option value="0">1. Hva er «vibe coding»?</option>
           <option value="1">2. Forsinkede busser</option>
@@ -487,16 +486,19 @@
           <option value="3">4. Restauranter Jæren/Gjesdal</option>
           <option value="4">5. Oversitting Vassøy-ferja</option>
           <option value="5">6. Ryfast-takster</option>
-          <option value="6">7. Beste akebakke</option>
+          <option value="6">7. Så ble det vinter og snø</option>
           <option value="7">8. Bygninger i strandsonen</option>
           <option value="8">9. Stavanger kommunes eiendommer</option>
-          <option value="9">10. Idéer / automasjon</option>
-          <option value="10">11. Slack-varsling konkurrenter</option>
-          <option value="11">12. Postliste-bot</option>
-          <option value="12">13. Brønnøysund-data</option>
+          <option value="9">10. Slack-varsling konkurrenter</option>
+          <option value="10">11. Postliste-bot</option>
+          <option value="11">12. Brønnøysund-data</option>
+          <option value="12">13. Egen transkribent</option>
           <option value="13">14. Dagsorden-bot</option>
           <option value="14">15. Lenker / annet</option>
-          <option value="15">16. Fra regneark til integrasjon</option>
+          <option value="15">16. Hvilke verktøy?</option>
+          <option value="16">17. Vibbekoding (Tenor)</option>
+          <option value="17">18. Rutekutt</option>
+          <option value="18">19. Fra regneark til integrasjon</option>
         </select>
       </div>
 
@@ -538,6 +540,7 @@
             <p><a href="https://aftenbladet-editorial-sa-entur-tij.pages.schibsted.ghe.com/"
   target="_blank" rel="noopener">https://aftenbladet-editorial-sa-entur-
   tij.pages.schibsted.ghe.com/</a></p>
+            <p><a href="https://editorial.aftenbladet.no/2026/sa-entur-delays/index.html" target="_blank" rel="noopener">https://editorial.aftenbladet.no/2026/sa-entur-delays/index.html</a></p>
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
@@ -600,11 +603,9 @@
             <p class="note">Forklarer gjenstående biler med visuelt grep.</p>
             <img class="illustration" src="vassoy.png" alt="Oversitting på Vassøy-ferja" />
             <p class="note">Løsning:</p>
-            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/
-  multimedias/4b77319f-3fb6-4ee5-b435-6480bca79e34/Oversikt%3A%20Vass%C3%B8y%20-%20oversitting"
+            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/4b77319f-3fb6-4ee5-b435-6480bca79e34/Oversikt%3A%20Vass%C3%B8y%20-%20oversitting"
   target="_blank" rel="noopener">
-              https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/4b77319f-3fb6-
-  4ee5-b435-6480bca79e34/Oversikt%3A%20Vass%C3%B8y%20-%20oversitting
+              https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/4b77319f-3fb6-4ee5-b435-6480bca79e34/Oversikt%3A%20Vass%C3%B8y%20-%20oversitting
             </a></p>
           </div>
           <details class="how-made">
@@ -703,10 +704,8 @@
         <section class="page">
           <header>
             <h1>Stavanger kommunes eiendommer</h1>
-            <p class="subtitle">Eksempel · Kart · Elisabeth Risa</p>
           </header>
           <div class="list">
-            <p class="note">Kart over kommunale eiendommer.</p>
             <div style="position:relative;height:0;padding-bottom:100%"><iframe style="width:100%;height:100%;border:0;border-radius:5px;position:absolute" src="https://dynamic.mc-cdn.io?id=7e7367a9f88447c60810ac83be967f68ebad52958ab7ad15404668a287f15a0a&access-token=JuLwMvIGLV6AmoMDDvvdDFdRDU0k87vTeef48fa7b7e9acdd9566b68165cfb76e1660d1e1" allow="geolocation" allowfullscreen></iframe></div>
             <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/70772462-bed2-4fe3-b58c-f59920c3fcfe/Kart%3A%20Stavanger%20kommunes%20eiendommer" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/70772462-bed2-4fe3-b58c-f59920c3fcfe/Kart%3A%20Stavanger%20kommunes%20eiendommer</a></p>
           </div>
@@ -714,40 +713,6 @@
             <summary>🛠️ Slik ble denne siden laget</summary>
             <p><strong>Data:</strong> Stavanger kommune (eiendomsdata hentet fra Lytix som regneark)</p>
             <p><strong>Teknisk løsning:</strong> Eiendommene ble eksportert som GeoJSON og importert i Mapcreator. Kartet bygges på Leaflet med OpenStreetMap som bakgrunnskart, og GeoJSON-laget plottes med klikkbare popups (bydel, gnr/bnr, areal og evt. adresse/merknad). Alt kjøres i nettleseren (ingen backend), og kan publiseres som inline HTML.</p>
-          </details>
-        </section>
-
-        <section class="page">
-          <div class="section">
-            <h2>Idéer / automasjon</h2>
-            <div class="list">
-              <ul>
-                <li>Slack-varsling når konkurrenter legger ut nyheter</li>
-                <li>Tidsbesparelser i redaksjonell hverdag</li>
-                <li>Dagsorden-bot: Slack-kanal + skraping av møtekalendere til kommuner m.fl.</li>
-                <li>Postliste-bot: skraping av postlister (kommuner, fylkeskommune, Ferde m.fl.) med
-  nedlasting per kilde for videre KI-bearbeiding</li>
-                <li>Uthenting av data fra Brønnøysund (under konstruksjon; kjøres foreløpig lokalt)</
-  li>
-                <li>Rutekutt: fra regneark til integrasjon (inline HTML)</li>
-                <li>Når jojo er nede med blank skjerm: mulig å lage egen transkribent?</li>
-                <li>Teknisk: integrasjoner i <span title="mm.schibsted.media">mm.schibsted.media</
-  span> (embedkode fra Mapcreator/Datawrapper m.fl., eller KI-generert inline HTML; mobile-first,
-  Aftenbladet blå profil, støtte for æ/ø/å)</li>
-              </ul>
-
-              <p class="note">Rutekutt-lenke: <a href="https://api.schibsted.tech/proxy/content/v3/
-  publication/sa/multimedias/5aeb5d44-b217-4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene"
-  target="_blank" rel="noopener">
-                https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/5aeb5d44-b217-
-  4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene
-              </a></p>
-            </div>
-          </div>
-          <details class="how-made">
-            <summary>🛠️ Slik ble denne siden laget</summary>
-            <p><strong>Konsept:</strong> Brainstorming med KI-assistanse</p>
-            <p><strong>Teknisk løsning:</strong> Denne presentasjonen er laget med vibbekoding – HTML generert av Claude/GPT basert på enkle tekstbeskrivelser.</p>
           </details>
         </section>
 
@@ -774,31 +739,43 @@
           </header>
           <div class="list">
             <p class="note">Skraping av postlister (kommuner, fylkeskommune, Ferde m.fl.) med nedlasting per kilde for videre KI-bearbeiding.</p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
-              <img src="postliste-bot-1.png" alt="Skjermbilde: nedlastede postliste-filer" style="width:100%;border-radius:6px" />
-              <img src="postliste-bot-2.png" alt="Skjermbilde: nedlastede postliste-filer" style="width:100%;border-radius:6px" />
-            </div>
+            <img src="postliste-bot-2.png" alt="Skjermbilde: nedlastede postliste-filer" style="width:100%;border-radius:6px" />
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
             <p><strong>Data:</strong> Postlister fra kommuner, fylkeskommune og andre offentlige aktører</p>
-            <p><strong>Teknisk løsning:</strong> Script som går gjennom en liste med kilder/URL-er, laster ned postlista per kilde (ett dokument per kommune/aktør) og lagrer som tekst/HTML/PDF for videre KI-bearbeiding (oppsummering, kategorisering, varsling).</p>
+            <p><strong>Teknisk løsning:</strong> Script som går gjennom en liste med kilder/URL-er, laster ned postlista per kilde (ett dokument per kommune/aktør) og lagrer som tekst/HTML/PDF for videre bearbeiding.</p>
+            <p><strong>Videre planer:</strong> KI-analyse av filene (oppsummering, kategorisering/tematisering og «hva er nytt?») og automatisk Slack-varsling når det dukker opp relevante saker.</p>
           </details>
         </section>
 
         <section class="page">
           <header>
             <h1>Uthenting av data fra Brønnøysund</h1>
-            <p class="subtitle">Datagrunnlag for restaurant- og bransjeoversikter</p>
           </header>
           <div class="list">
-            <p class="note">Uthenting av data fra Brønnøysund som datagrunnlag til å lage oversikt over restauranter og andre bransjer (under konstruksjon – kjøres foreløpig bare lokalt hos meg).</p>
-            <img src="brreg-bransje-oppslag.png" alt="Skjermbilde: Brreg bransje-oppslag" style="width:100%;border-radius:6px" />
+            <p class="note">Datagrunnlag for restaurant- og bransjeoversikter: Uthenting av data fra Brønnøysund som datagrunnlag til å lage oversikt over restauranter og andre bransjer (under konstruksjon – kjøres foreløpig bare lokalt hos meg).</p>
+            <img src="brreg.png" alt="Skjermbilde: Brreg bransje-oppslag" style="width:100%;border-radius:6px" />
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
             <p><strong>Data:</strong> Brønnøysundregistrene (Enhetsregisteret)</p>
-            <p><strong>Teknisk løsning:</strong> Lokalt script som henter enheter per næringskode (NACE) og kommune, normaliserer felter (navn, adresse, orgnr, bransjekode) og eksporterer til CSV/JSON for videre bruk i kart/oversikter.</p>
+            <p><strong>Teknisk løsning:</strong> Lokalt script som henter enheter per næringskode (NACE) og kommune, normaliserer felter (navn, adresse, orgnr, bransjekode) og eksporterer til CSV/JSON for videre bruk i lister og integrasjoner (som restaurantoversikten).</p>
+          </details>
+        </section>
+
+        <section class="page">
+          <header>
+            <h1>Når jojo er nede med blank skjerm</h1>
+            <p class="subtitle">Mulig å lage sin egen transkribent</p>
+          </header>
+          <div class="list">
+            <img src="transkribent.png" alt="Illustrasjon: transkribent" style="width:100%;border-radius:6px" />
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Data:</strong> Lydfiler / opptak (WAV/MP3/M4A)</p>
+            <p><strong>Teknisk løsning:</strong> Lokal prosess som kjører tale-til-tekst (f.eks. Whisper) og eksporterer transkripsjon til tekst/SRT.</p>
           </details>
         </section>
 
@@ -844,16 +821,97 @@
           </details>
         </section>
 
+        <section class="page">
+          <header>
+            <h1>Hvilke verktøy?</h1>
+            <p class="subtitle">Praktisk oppsett</p>
+          </header>
+          <div class="list">
+            <ul>
+              <li><strong>Editor:</strong> Visual Studio Code</li>
+              <li><strong>KI-assistent:</strong> GitHub Copilot / Claude / Gemini (avhengig av tilgang)</li>
+              <li><strong>Versjonskontroll:</strong> Git</li>
+              <li><strong>Repo/hosting:</strong> GitHub / Schibsted GHE Pages (statisk HTML)</li>
+              <li><strong>Publisering i saker:</strong> <span title="mm.schibsted.media">mm.schibsted.media</span> (inline HTML + embed-koder)</li>
+              <li><strong>Visualisering:</strong> Mapcreator, Datawrapper, Leaflet</li>
+              <li><strong>Data/klipp og lim:</strong> Regneark (Excel/Google Sheets), CSV/JSON</li>
+              <li><strong>Automatisering:</strong> Python-scripts + cron (lokalt eller via Actions)</li>
+              <li><strong>Deling/varsling:</strong> Slack (incoming webhook / app)</li>
+            </ul>
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Teknisk løsning:</strong> Samme prinsipp som resten av decket: én statisk HTML-fil med inline CSS/JS, og bilder/illustrasjoner lagt ved i repoet.</p>
+          </details>
+        </section>
+
+        <section class="page">
+          <header>
+            <h1>Vibbekoding</h1>
+          </header>
+          <div class="list">
+            <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.06)">
+              <iframe
+                src="https://tenor.com/embed/7532496304787656770"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+                loading="lazy"
+                allowfullscreen
+                title="Tenor GIF: old people pressing buttons">
+              </iframe>
+            </div>
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Hva som skal til</summary>
+            <p><strong>1) Idé:</strong> Definer hva du vil forklare/visualisere ("en vits", et datapunkt, et kart, en liste).</p>
+            <p><strong>2) Kilde:</strong> Finn en enkel kilde (CSV/regneark, API, embedkode eller skjermdump).</p>
+            <p><strong>3) Prompt:</strong> Beskriv ønsket resultat i klart språk (målgruppe, mobilvisning, hva som er viktigst, og hvilke felter som skal vises).</p>
+            <p><strong>4) Generer:</strong> Be KI-en lage HTML/CSS/JS (helst mobile-first) og pakke alt i én embed som ikke kolliderer med resten av siden.</p>
+            <p><strong>5) Lim inn:</strong> Bruk enten embed-kode fra et verktøy (Mapcreator/Datawrapper) eller inline HTML i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
+            <p><strong>6) Sjekk:</strong> Test i Chrome/Safari, sjekk æ/ø/å, og pass på at det ikke blir scroll-trap eller tregt på mobil.</p>
+            <p><strong>7) Iterer:</strong> “Casino-knappen” er at du sitter og trykker «godkjenn» når Codex/Gemini/Claude spør — små endringer og rask feedback helt til det sitter.</p>
+          </details>
+        </section>
+
+        <section class="page">
+          <header>
+            <h1>Rutekutt</h1>
+            <p class="subtitle">Fra regneark til integrasjon (inline HTML)</p>
+          </header>
+          <div class="list">
+            <p class="note">Fra regneark til ferdig integrasjon: KI hjelper med å strukturere data og generere ren HTML som kan limes rett inn i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
+            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/5aeb5d44-b217-4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/5aeb5d44-b217-4f4f-a010-a0823b26daf5/Rutekutt%20v3-flertallspartiene</a></p>
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Data:</strong> Regneark (parti/vedtak/tall)</p>
+            <p><strong>Teknisk løsning:</strong> Regneark → KI rydder/standardiserer kolonner → genererer HTML (tabell/kort) med enkel CSS → HTML limes inn som inline HTML-integrasjon i mm.schibsted.media.</p>
+          </details>
+        </section>
+
         <section class="page big-title">
           <header>
             <h1>Fra regneark til integrasjon</h1>
             <p class="subtitle">Inline HTML i mm.schibsted.media</p>
           </header>
           <div class="list">
+            <img src="embed.png" alt="Illustrasjon: embedkode" style="width:100%;border-radius:6px" />
+            <p><strong>Embed → integrasjon:</strong> Vi kan hente embed-kode fra Mapcreator, Datawrapper og andre verktøy og lime den inn i <span title="mm.schibsted.media">mm.schibsted.media</span> for å lage en integrasjon.</p>
             <p class="note">Problem: Vi får ofte tabeller/oversikter som skjermdump eller regneark.</p>
+            <img src="inline.png" alt="Illustrasjon: inline HTML" style="width:100%;border-radius:6px" />
+            <p><strong>…eller lage koden selv:</strong> Med inline HTML kan vi skrive/generere koden selv og lime den inn direkte i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
+            <p><strong>Teknisk:</strong> Integrasjoner i <span title="mm.schibsted.media">mm.schibsted.media</span> kan være embedkode fra Mapcreator/Datawrapper m.fl., eller KI-generert inline HTML. Bygg mobile-first, hold deg til Aftenbladets blå profil, og pass på støtte for æ/ø/å.</p>
             <p><strong>Inline HTML</strong> betyr at vi skriver/genererer ren HTML-kode (f.eks. en tabell med <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>) som kan limes direkte inn i et CMS-felt — uten eget repo, hosting eller byggsteg.</p>
             <p><strong>Arbeidsflyt:</strong> Skjermdump/regneark → KI strukturerer innholdet → HTML genereres → HTML limes inn i mm.schibsted.media → mm.schibsted.media renderer dette som en integrasjon som kan brukes i saken.</p>
           </div>
+          <details class="how-made">
+            <summary>🛠️ Mer om inline HTML-oppsettet</summary>
+            <p><strong>Én fil:</strong> Hele integrasjonen er vanligvis én HTML-snutt med dokumentstruktur, inline CSS og inline JavaScript.</p>
+            <p><strong>CSS-namespace:</strong> Pakk alt inn i en unik wrapper (f.eks. <code>&lt;div id=&quot;widget-xyz&quot;&gt;</code>) og prefix alle selektorer for å unngå kollisjon med avisens CSS.</p>
+            <p><strong>Ingen globale variabler:</strong> JS kjøres i en IIFE (selvkjørende funksjon) og eksponerer ingenting globalt.</p>
+            <p><strong>Dataflyt:</strong> Enten legges data inn som JSON i koden, eller lastes fra en publisert CSV/JSON-URL. Hold datakilder uten nøkler/hemmeligheter.</p>
+            <p><strong>Mobil først:</strong> Unngå scroll-traps inni embed (fast høyde + <code>overflow: auto</code>). Bruk heller progressive løsninger ("vis flere").</p>
+            <p><strong>Publisering:</strong> HTML-en limes inn som inline HTML i <span title="mm.schibsted.media">mm.schibsted.media</span> og rendres direkte i artikkelen.</p>
+          </details>
         </section>
             </div>
 
@@ -863,7 +921,7 @@
         const pages = Array.from(document.querySelectorAll('.page'));
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const modeBtn = document.getElementById('modeBtn');
+        const modeBtn = null;
         const pageSelect = document.getElementById('pageSelect');
 
         const params = new URLSearchParams(window.location.search);
@@ -887,28 +945,12 @@
           } catch (e) {}
         }
 
-        function setModeLabel(){
-          modeBtn.textContent = document.body.classList.contains('deck-mode') ? 'Web' : 'Storskjerm';
-        }
+        function setModeLabel(){}
 
-        function setMode(enabled){
-          document.body.classList.toggle('deck-mode', enabled);
-          try {
-            localStorage.setItem('sa-pptx:deck-mode', enabled ? '1' : '0');
-          } catch (e) {}
-          setModeLabel();
-        }
+        function setMode(enabled){}
 
         function readMode(){
-          if (params.has('mode')) {
-            const value = params.get('mode');
-            return value === 'deck' || value === '1' || value === 'true';
-          }
-          try {
-            return localStorage.getItem('sa-pptx:deck-mode') === '1';
-          } catch (e) {
-            return false;
-          }
+          return false;
         }
 
         function show(i){
@@ -935,7 +977,6 @@
 
         prevBtn.addEventListener('click', () => show(index - 1));
         nextBtn.addEventListener('click', () => show(index + 1));
-        modeBtn.addEventListener('click', () => setMode(!document.body.classList.contains('deck-mode')));
         pageSelect.addEventListener('change', (e) => show(parseInt(e.target.value, 10)));
 
         document.addEventListener('keydown', (e) => {
