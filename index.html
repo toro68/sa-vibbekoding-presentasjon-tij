@@ -492,9 +492,11 @@
           <option value="8">9. Stavanger kommunes eiendommer</option>
           <option value="9">10. Idéer / automasjon</option>
           <option value="10">11. Slack-varsling konkurrenter</option>
-          <option value="11">12. Dagsorden-bot</option>
-          <option value="12">13. Lenker / annet</option>
-          <option value="13">14. Fra regneark til integrasjon</option>
+          <option value="11">12. Postliste-bot</option>
+          <option value="12">13. Brønnøysund-data</option>
+          <option value="13">14. Dagsorden-bot</option>
+          <option value="14">15. Lenker / annet</option>
+          <option value="15">16. Fra regneark til integrasjon</option>
         </select>
       </div>
 
@@ -752,7 +754,7 @@
         <section class="page">
           <header>
             <h1>Slack-varsling når konkurrenter legger ut nyheter</h1>
-            <p class="subtitle">Ny side · Automatisert overvåking</p>
+            <p class="subtitle">Automatisert overvåking</p>
           </header>
           <div class="list">
             <p class="note">Eksempel på varsling i Slack når konkurrenter publiserer nye saker.</p>
@@ -762,6 +764,41 @@
             <summary>🛠️ Slik ble denne siden laget</summary>
             <p><strong>Data:</strong> RSS/HTML fra konkurrenters forside/feeds (tittel, lenke, publiseringstid)</p>
             <p><strong>Teknisk løsning:</strong> En planlagt jobb (cron/GitHub Actions/Cloud Scheduler) henter og parser feedene, dedupliserer mot sist kjente artikler og sender melding til Slack via Incoming Webhook eller Slack API. Varslene grupperes per kilde og inneholder klikkbare lenker.</p>
+          </details>
+        </section>
+
+        <section class="page">
+          <header>
+            <h1>Postliste-bot</h1>
+            <p class="subtitle">Automatisert overvåking</p>
+          </header>
+          <div class="list">
+            <p class="note">Skraping av postlister (kommuner, fylkeskommune, Ferde m.fl.) med nedlasting per kilde for videre KI-bearbeiding.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
+              <img src="postliste-bot-1.png" alt="Skjermbilde: nedlastede postliste-filer" style="width:100%;border-radius:6px" />
+              <img src="postliste-bot-2.png" alt="Skjermbilde: nedlastede postliste-filer" style="width:100%;border-radius:6px" />
+            </div>
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Data:</strong> Postlister fra kommuner, fylkeskommune og andre offentlige aktører</p>
+            <p><strong>Teknisk løsning:</strong> Script som går gjennom en liste med kilder/URL-er, laster ned postlista per kilde (ett dokument per kommune/aktør) og lagrer som tekst/HTML/PDF for videre KI-bearbeiding (oppsummering, kategorisering, varsling).</p>
+          </details>
+        </section>
+
+        <section class="page">
+          <header>
+            <h1>Uthenting av data fra Brønnøysund</h1>
+            <p class="subtitle">Datagrunnlag for restaurant- og bransjeoversikter</p>
+          </header>
+          <div class="list">
+            <p class="note">Uthenting av data fra Brønnøysund som datagrunnlag til å lage oversikt over restauranter og andre bransjer (under konstruksjon – kjøres foreløpig bare lokalt hos meg).</p>
+            <img src="brreg-bransje-oppslag.png" alt="Skjermbilde: Brreg bransje-oppslag" style="width:100%;border-radius:6px" />
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Data:</strong> Brønnøysundregistrene (Enhetsregisteret)</p>
+            <p><strong>Teknisk løsning:</strong> Lokalt script som henter enheter per næringskode (NACE) og kommune, normaliserer felter (navn, adresse, orgnr, bransjekode) og eksporterer til CSV/JSON for videre bruk i kart/oversikter.</p>
           </details>
         </section>
 
