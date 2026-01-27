@@ -377,6 +377,100 @@
         outline: 2px solid var(--link);
         outline-offset: 1px;
       }
+
+      .strand-widget{
+        --sw-bg-primary: #0f2d52;
+        --sw-bg-secondary: #0a1e36;
+        --sw-text: #ffffff;
+        --sw-accent: #60a5fa;
+        --sw-radius: 18px;
+        --sw-chart-line: rgba(255, 255, 255, 0.9);
+        --sw-chart-grid: rgba(255, 255, 255, 0.1);
+
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto 2rem;
+      }
+
+      .strand-widget *{ box-sizing: inherit; }
+
+      .strand-widget-card{
+        border-radius: var(--sw-radius);
+        padding: 20px;
+        background: linear-gradient(180deg, rgba(15, 45, 82, 0.95), rgba(10, 30, 54, 0.98));
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        color: var(--sw-text);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .strand-widget-card::before{
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 60%);
+        pointer-events: none;
+      }
+
+      .strand-value{
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        font-variant-numeric: tabular-nums;
+        margin: 0;
+        background: linear-gradient(180deg, #fff, #cbd5e1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .strand-caption{
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 0.5rem;
+      }
+
+      .strand-chart-container{
+        margin-top: 2rem;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+      }
+
+      .strand-chart-container.is-ready{ opacity: 1; }
+
+      .strand-chart{
+        width: 100%;
+        height: auto;
+        display: block;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+      }
+
+      .strand-source{
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 1rem;
+        text-align: right;
+      }
+
+      .sr-only{
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
     </style>
   </head>
 
@@ -397,8 +491,10 @@
           <option value="7">8. Bygninger i strandsonen</option>
           <option value="8">9. Stavanger kommunes eiendommer</option>
           <option value="9">10. Idéer / automasjon</option>
-          <option value="10">11. Dagsorden-bot</option>
-          <option value="11">12. Lenker / annet</option>
+          <option value="10">11. Slack-varsling konkurrenter</option>
+          <option value="11">12. Dagsorden-bot</option>
+          <option value="12">13. Lenker / annet</option>
+          <option value="13">14. Fra regneark til integrasjon</option>
         </select>
       </div>
 
@@ -468,7 +564,7 @@
             <p><strong>Journalist:</strong> Eilin Lindvoll</p>
             <p><strong>Sak:</strong> <a href="https://www.aftenbladet.no/okonomi/i/OkQEjq/sjekk-restaurantregnskapene-i-stavanger-og-sandnes" target="_blank" rel="noopener">Sulten på suksess</a></p>
             <p><strong>Data:</strong> Brønnøysundregistrene (NACE-koder for serveringssteder)</p>
-            <p><strong>Teknisk løsning:</strong> Uthenting av bransjedata, filtrert på kommuner og næringskoder. Inline HTML i mm.schibsted.media.</p>
+            <p><strong>Teknisk løsning:</strong> Inline HTML-widget (CSS + JS) limt inn i mm.schibsted.media. Data hentes ut fra Brønnøysund, filtreres (kommune/næringskode) og legges inn som JSON i integrasjonen. JS bygger UI-et (søk, kommune-filter, topp-5) og rendrer lista med <code>&lt;details&gt;</code>-elementer.</p>
           </details>
         </section>
 
@@ -495,11 +591,11 @@
 
         <section class="page">
           <header>
-            <h1>Oversitting på Vassøy-ferja</h1>
-            <p class="subtitle">Eksempel · Skjermdump · Kilde: Kolumbus</p>
+            <h1>Gjenstående biler på Vassøy-ferja</h1>
+            <p class="subtitle">Data: Kolumbus</p>
           </header>
           <div class="list">
-            <p class="note">Forklarer oversitting med visuelt grep.</p>
+            <p class="note">Forklarer gjenstående biler med visuelt grep.</p>
             <img class="illustration" src="vassoy.png" alt="Oversitting på Vassøy-ferja" />
             <p class="note">Løsning:</p>
             <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/
@@ -511,8 +607,10 @@
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
-            <p><strong>Data:</strong> Kolumbus rutetider</p>
-            <p><strong>Teknisk løsning:</strong> Visuell fremstilling av fergekapasitet og oversitting. KI-generert HTML basert på rutedata.</p>
+            <p><strong>Journalist:</strong> Tor Inge Jøssang</p>
+            <p><strong>Sak:</strong> <a href="https://www.aftenbladet.no/lokalt/i/K8yeAe/moeter-opp-en-halvtime-foer-avgang-men-kommer-ikke-med" target="_blank" rel="noopener">Møter opp en halvtime før avgang, men kommer ikke med</a></p>
+            <p><strong>Data:</strong> Skjermdump av regneark fra Kolumbus</p>
+            <p><strong>Teknisk løsning:</strong> Inline HTML-widget (CSS + JS) limt inn i mm.schibsted.media. Data ble hentet fra skjermdump/regneark fra Kolumbus og strukturert til et JSON-datasett (måneder/avganger). JavaScript bygger filtrering (avgang/retning), KPI-er og tabell med enkel stolpevisualisering.</p>
           </details>
         </section>
 
@@ -524,38 +622,30 @@
           <div class="list">
             <p class="note">Takstendringer gjort lesbare i tabellformat.</p>
             <img class="illustration" src="ryfast.png" alt="Ryfast-takster" />
-            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/
-  multimedias/913ffd0e-d557-47ee-a3e3-60d219e58e75/Tabell%3A%20Ryfast-takster%202026"
-  target="_blank" rel="noopener">
-              https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/913ffd0e-d557-
-  47ee-a3e3-60d219e58e75/Tabell%3A%20Ryfast-takster%202026
-            </a></p>
+            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/913ffd0e-d557-47ee-a3e3-60d219e58e75/Tabell%3A%20Ryfast-takster%202026" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/913ffd0e-d557-47ee-a3e3-60d219e58e75/Tabell%3A%20Ryfast-takster%202026</a></p>
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Kilde:</strong> <a href="https://ferde.no/bomanlegg-og-priser/ryfast" target="_blank" rel="noopener">Ferde</a></p>
             <p><strong>Data:</strong> Ferde/Statens vegvesen takstvedtak</p>
-            <p><strong>Teknisk løsning:</strong> Tabellvisning av takster med før/etter-sammenligning. Inline HTML.</p>
+            <p><strong>Teknisk løsning:</strong> Inline HTML-widget (CSS + JS) limt inn i mm.schibsted.media. Widgeten er «scopet» under en egen wrapper-id for å unngå stilkollisjoner, og bruker JavaScript til å bytte takstgruppe og regne ut/visuelle endringer (før/etter) for bomstasjonene.</p>
           </details>
         </section>
 
         <section class="page">
           <header>
-            <h1>Beste akebakke (Karl Almelid, m.fl.)</h1>
-            <p class="subtitle">Eksempel · Drøyt 100 forslag</p>
+            <h1>Så ble det vinter og snø</h1>
           </header>
           <div class="list">
-            <p class="note">Lesertips samlet til én enkel oversikt.</p>
-            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/
-  b8b279d9-8fac-46ba-80f7-ac036a863d76/Aking%20og%20skil%C3%B8yper%3A%20Lesernes%20forslag"
-  target="_blank" rel="noopener">
-              https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/b8b279d9-8fac-
-  46ba-80f7-ac036a863d76/Aking%20og%20skil%C3%B8yper%3A%20Lesernes%20forslag
-            </a></p>
+            <img class="illustration" src="akebakke.png" alt="Illustrasjon: del din beste akebakke eller skiløype" loading="lazy" />
+            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/b8b279d9-8fac-46ba-80f7-ac036a863d76/Aking%20og%20skil%C3%B8yper%3A%20Lesernes%20forslag" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/b8b279d9-8fac-46ba-80f7-ac036a863d76/Aking%20og%20skil%C3%B8yper%3A%20Lesernes%20forslag</a></p>
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Journalist:</strong> Karl Almedal</p>
+            <p><strong>Sak:</strong> <a href="https://www.aftenbladet.no/lokalt/i/zOGvr5/hvor-er-de-beste-akebakkene" target="_blank" rel="noopener">Hvor er de beste akebakkene?</a></p>
             <p><strong>Data:</strong> Lesertips (drøyt 100 forslag)</p>
-            <p><strong>Teknisk løsning:</strong> Samlet lesertips i strukturert HTML-liste. Enkel å oppdatere.</p>
+            <p><strong>Teknisk løsning:</strong> Inline HTML i mm.schibsted.media med Leaflet-kart (OpenStreetMap). Leseren klikker i kartet, plasserer en markør og skriver en kort beskrivelse (ingen navn/personopplysninger). Klikk fyller inn lat/lng og åpner et enkelt skjema. Innsending går via Google Apps Script til Google Sheets. Eksisterende tips lastes inn ved å lese et publisert CSV-uttrekk fra arket og plotte markører på kartet.</p>
           </details>
         </section>
 
@@ -565,18 +655,46 @@
             <p class="subtitle">Eksempel · Illustrasjon med telleverk</p>
           </header>
           <div class="list">
-            <p class="note">Telleverk som viser utvikling i strandsonen.</p>
-            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/
-  multimedias/011020a2-7e15-4e73-a547-936f3a5badeb/HTML%3A%20Illustrasjon%20med%20telleverk"
-  target="_blank" rel="noopener">
-              https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/011020a2-7e15-
-  4e73-a547-936f3a5badeb/HTML%3A%20Illustrasjon%20med%20telleverk
-            </a></p>
+            <div class="strand-widget"
+              data-series="31643,34085,34665,35311,35954,36485,37067,37559,38128,38624,39092,39495,39927,40315,40733,41350,41793,42233,42691,43114,43424,43723"
+              data-labels="2000,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025"
+              data-caption="Bygninger i strandsonen (Rogaland)"
+              data-source="Kilde: SSB (tabell 06505)"
+              data-duration="2500">
+
+              <div class="strand-widget-card">
+                <div class="sr-only" data-js="sr-text">Antall bygninger i strandsonen økte fra 31 643 i 2000 til 43 723 i 2025.</div>
+
+                <div class="strand-value" aria-hidden="true" data-js="counter">0</div>
+                <div class="strand-caption" data-js="caption"></div>
+
+                <div class="strand-chart-container" data-js="chart-wrap">
+                  <svg class="strand-chart" viewBox="0 0 640 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="rgba(255,255,255,0.4)" />
+                        <stop offset="100%" stop-color="rgba(255,255,255,1)" />
+                      </linearGradient>
+                    </defs>
+                    <g data-js="grid-group"></g>
+                    <path fill="none" stroke="url(#lineGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" data-js="chart-line"></path>
+                    <g data-js="labels-group"></g>
+                    <circle r="6" fill="#e74c3c" stroke="#fff" stroke-width="2" data-js="chart-marker"></circle>
+                  </svg>
+                </div>
+
+                <div class="strand-source" data-js="source"></div>
+              </div>
+            </div>
+
+            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/011020a2-7e15-4e73-a547-936f3a5badeb/HTML%3A%20Illustrasjon%20med%20telleverk" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/011020a2-7e15-4e73-a547-936f3a5badeb/HTML%3A%20Illustrasjon%20med%20telleverk</a></p>
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Journalist:</strong> Tor Inge Jøssang</p>
+            <p><strong>Sak:</strong> <a href="https://www.aftenbladet.no/lokalt/i/Av8wBz/12-000-bygg-fikk-ja-til-tross-for-forbud" target="_blank" rel="noopener">12.000 bygg fikk ja til tross for forbud</a></p>
             <p><strong>Data:</strong> SSB/Kartverket (bygningsdata)</p>
-            <p><strong>Teknisk løsning:</strong> Animert telleverk med JavaScript. Teller opp bygninger i strandsonen over tid.</p>
+            <p><strong>Teknisk løsning:</strong> Inline HTML-widget (CSS + JS) limt inn i mm.schibsted.media. JS animerer både telleverk og en enkel linjegraf (SVG) når widgeten scroller inn i viewport (IntersectionObserver).</p>
           </details>
         </section>
 
@@ -587,17 +705,13 @@
           </header>
           <div class="list">
             <p class="note">Kart over kommunale eiendommer.</p>
-            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/
-  multimedias/70772462-bed2-4fe3-b58c-f59920c3fcfe/Kart%3A%20Stavanger%20kommunes%20eiendommer"
-  target="_blank" rel="noopener">
-              https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/70772462-bed2-
-  4fe3-b58c-f59920c3fcfe/Kart%3A%20Stavanger%20kommunes%20eiendommer
-            </a></p>
+            <div style="position:relative;height:0;padding-bottom:100%"><iframe style="width:100%;height:100%;border:0;border-radius:5px;position:absolute" src="https://dynamic.mc-cdn.io?id=7e7367a9f88447c60810ac83be967f68ebad52958ab7ad15404668a287f15a0a&access-token=JuLwMvIGLV6AmoMDDvvdDFdRDU0k87vTeef48fa7b7e9acdd9566b68165cfb76e1660d1e1" allow="geolocation" allowfullscreen></iframe></div>
+            <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/70772462-bed2-4fe3-b58c-f59920c3fcfe/Kart%3A%20Stavanger%20kommunes%20eiendommer" target="_blank" rel="noopener">https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/70772462-bed2-4fe3-b58c-f59920c3fcfe/Kart%3A%20Stavanger%20kommunes%20eiendommer</a></p>
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
-            <p><strong>Data:</strong> Stavanger kommune (eiendomsdata)</p>
-            <p><strong>Teknisk løsning:</strong> Kartvisning med Mapcreator/Leaflet. Eiendommer plottet på kart med popups.</p>
+            <p><strong>Data:</strong> Stavanger kommune (eiendomsdata hentet fra Lytix som regneark)</p>
+            <p><strong>Teknisk løsning:</strong> Eiendommene ble eksportert som GeoJSON og importert i Mapcreator. Kartet bygges på Leaflet med OpenStreetMap som bakgrunnskart, og GeoJSON-laget plottes med klikkbare popups (bydel, gnr/bnr, areal og evt. adresse/merknad). Alt kjøres i nettleseren (ingen backend), og kan publiseres som inline HTML.</p>
           </details>
         </section>
 
@@ -636,114 +750,37 @@
         </section>
 
         <section class="page">
+          <header>
+            <h1>Slack-varsling når konkurrenter legger ut nyheter</h1>
+            <p class="subtitle">Ny side · Automatisert overvåking</p>
+          </header>
+          <div class="list">
+            <p class="note">Eksempel på varsling i Slack når konkurrenter publiserer nye saker.</p>
+            <img src="lokale-nyheter-slack.png" alt="Skjermbilde av Slack-varsler med lenker til nye artikler" style="width:100%;border-radius:6px" />
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Data:</strong> RSS/HTML fra konkurrenters forside/feeds (tittel, lenke, publiseringstid)</p>
+            <p><strong>Teknisk løsning:</strong> En planlagt jobb (cron/GitHub Actions/Cloud Scheduler) henter og parser feedene, dedupliserer mot sist kjente artikler og sender melding til Slack via Incoming Webhook eller Slack API. Varslene grupperes per kilde og inneholder klikkbare lenker.</p>
+          </details>
+        </section>
+
+        <section class="page">
           <div class="section">
             <h2>Dagsorden-bot: Politiske møter (neste 10 dager)</h2>
             <div class="list">
-              <p class="note">Politiske møter de neste 10 dagene – Ryfylke, Dalane (39 møter)</p>
-
-              <div class="day">Torsdag 22. January 2026</div>
-              <p class="meeting">Fagskolen Rogaland (Rogaland fylkeskommune) – kl. 09:00</p>
-              <p class="meeting">Yrkesopplæringsnemnda (Rogaland fylkeskommune) – kl. 09:30</p>
-
-              <div class="day">Fredag 23. January 2026</div>
-              <p class="meeting">Ungdommens fylkesråd (Rogaland fylkeskommune) – kl. 09:00</p>
-
-              <div class="day">Mandag 26. January 2026</div>
-              <p class="meeting">Eldreråd (Lund kommune) – kl. 08:30 <small>Møterom Rådhuset</small></
-        p>
-              <p class="meeting">Råd for personer med funksjonsnedsettelse (Sirdal kommune) – kl.
-        10:00 <small>Formannskapssalen</small></p>
-              <p class="meeting">Fylkesrådet for personer med funksjonsnedsettelse (Rogaland
-        fylkeskommune) – kl. 10:00</p>
-              <p class="meeting">Utvalg for flerkulturell medvirkning (Rogaland fylkeskommune) – kl.
-        10:00</p>
-              <p class="meeting">Eldrerådet (Sirdal kommune) – kl. 13:00</p>
-              <p class="meeting">Ungdomsråd (Lund kommune) – kl. 16:30 <small>Møterom Rådhuset</
-        small></p>
-              <p class="meeting">Råd for eldre og mennesker med nedsatt funksjonsevne (Sokndal
-        kommune) – kl. 17:00 <small>Kantinen</small></p>
-              <p class="meeting">Hovedutvalg for Landbruk, miljø og teknikk (Sokndal kommune) – kl.
-        18:00 <small>Kommunestyresalen</small></p>
-              <p class="meeting">Ungdomsrådet (Sokndal kommune) – kl. 18:00 <small>Møterom 2</small></
-        p>
-              <p class="meeting">Kommunestyret (Eigersund kommune) – kl. 18:00</p>
-
-              <div class="day">Tirsdag 27. January 2026</div>
-              <p class="meeting">Eldrerådet (Sauda kommune) – kl. 10:00 <small>Rådhuset –
-        Formannskapssalen</small></p>
-              <p class="meeting">Utvalg for teknikk, landbruk og miljø (Sirdal kommune) – kl. 10:00
-        <small>Formannskapssalen</small></p>
-              <p class="meeting">Sirdal ungdomsråd (Sirdal kommune) – kl. 10:00</p>
-              <p class="meeting">Eldrerådet (Rogaland fylkeskommune) – kl. 10:00</p>
-              <p class="meeting">Opplæringsutvalget (Rogaland fylkeskommune) – kl. 11:30</p>
-              <p class="meeting">Funksjonsnedsettes Råd (Sauda kommune) – kl. 13:00 <small>Rådhuset –
-        Formannskapssalen</small></p>
-              <p class="meeting">Formannskapet (Eigersund kommune) – kl. 13:01</p>
-              <p class="meeting">Formannskapet (Eigersund kommune) – kl. 13:01</p>
-              <p class="meeting">Ungdomsrådet (Strand kommune) – kl. 14:00 <small>Kommunestyresalen</
-        small></p>
-              <p class="meeting">Hovedutvalg for Levekår (Sokndal kommune) – kl. 18:00
-        <small>Kantinen</small></p>
-              <p class="meeting">LMT-utvalet (Bjerkreim kommune) – kl. 19:00 <small>Møterom 2</
-        small></p>
-
-              <div class="day">Onsdag 28. January 2026</div>
-              <p class="meeting">Ungdomsrådet (Sauda kommune) – kl. 09:00 <small>Rådhuset –
-        Formannskapssalen</small></p>
-              <p class="meeting">Formannskapet (Sokndal kommune) – kl. 09:00
-        <small>Kommunestyresalen</small></p>
-              <p class="meeting">Utvalg for oppvekst og levekår (Sirdal kommune) – kl. 09:30
-        <small>Formannskapssalen</small></p>
-              <p class="meeting">Samferdselsutvalget (Rogaland fylkeskommune) – kl. 11:30</p>
-              <p class="meeting">Rådet for mennesker med nedsatt funksjonsevne (Strand kommune) – kl.
-        13:00 <small>Kommunestyresalen</small></p>
-              <p class="meeting">Administrasjonsutvalet (Bjerkreim kommune) – kl. 16:00</p>
-              <p class="meeting">Formannskapet (Bjerkreim kommune) – kl. 17:00
-        <small>Kommunestyresalen</small></p>
-
-              <div class="day">Torsdag 29. January 2026</div>
-              <p class="meeting">Kommunestyret og formannskapets porteføljeutvalg (Sirdal kommune) –
-        kl. 09:00 <small>Formannskapssalen</small></p>
-              <p class="meeting">Eldrerådet (Strand kommune) – kl. 11:30 <small>Kommunestyresalen</
-        small></p>
-              <p class="meeting">Kultur- og næringsutvalget (Rogaland fylkeskommune) – kl. 11:30</p>
-              <p class="meeting">Formannskapet (Sirdal kommune) – kl. 12:00 <small>Formannskapssalen</
-        small></p>
-              <p class="meeting">Kommunestyret (Sirdal kommune) – kl. 18:00 <small>Kommunestyresalen</
-        small></p>
-              <p class="meeting">Levekårsutvalget (Lund kommune) – kl. 18:00 <small>Rådhuset –
-        spiserom</small></p>
-              <p class="meeting">PNM utvalget (Lund kommune) – kl. 19:00 <small>Møterom Rådhuset</
-        small></p>
-
-              <div class="day">Fredag 30. January 2026</div>
-              <p class="meeting">Styret i Tannhelse Rogaland FKF (Rogaland fylkeskommune) – kl.
-        13:00</p>
-
-              <div class="summary">
-          <div class="day">Oppsummering per kommune</div>
-          <ul>
-            <li>(Arrangementer-SA-kalender): 0 møter</li>
-            <li>Bjerkreim kommune: 3 møter</li>
-            <li>Bymiljøpakken: 0 møter</li>
-            <li>Eigersund kommune: 3 møter</li>
-            <li>Ferde: 0 møter</li>
-            <li>Hjelmeland kommune: 0 møter</li>
-            <li>Lund kommune: 4 møter</li>
-            <li>Rogaland fylkeskommune: 10 møter</li>
-            <li>Sauda kommune: 3 møter</li>
-            <li>Sirdal kommune: 8 møter</li>
-            <li>Sokndal kommune: 5 møter</li>
-            <li>Strand kommune: 3 møter</li>
-            <li>Suldal kommune: 0 møter</li>
-          </ul>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
+                <img src="dagsorden-bot-1.png" alt="Skjermbilde: Dagsorden-bot – Nord-Jæren og Jæren" style="width:100%;border-radius:6px" />
+                <img src="dagsorden-bot-2.png" alt="Skjermbilde: Dagsorden-bot – Ryfylke og Dalane" style="width:100%;border-radius:6px" />
               </div>
             </div>
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
             <p><strong>Data:</strong> Skraping av møtekalendere fra kommuner og fylkeskommune</p>
-            <p><strong>Teknisk løsning:</strong> Python-script som henter møter fra offentlige kalendere og aggregerer dem. Kjøres på cron-schedule.</p>
+            <p><strong>Teknisk løsning:</strong> Python-script som henter møter fra offentlige kalendere og aggregerer dem. Kjøres på cron-schedule. Bot-en publiserer også en oversikt over hva som skrapes (antall møter per kilde/kommune):</p>
+            <p><strong>Oppsummering per kommune (Ryfylke/Dalane):</strong> Arrangementer-SA-kalender · Bjerkreim kommune · Bymiljøpakken · Eigersund kommune · Ferde · Hjelmeland kommune · Lund kommune · Rogaland fylkeskommune · Sauda kommune · Sirdal kommune · Sokndal kommune · Strand kommune · Suldal kommune</p>
+            <p><strong>Oppsummering per kommune (Nord-Jæren/Jæren):</strong> Turnus-kalender · Gjesdal kommune · Hå kommune · Klepp kommune · Kvitsøy kommune · Sandnes kommune · Sola kommune · Stavanger kommune · Time kommune</p>
           </details>
         </section>
 
@@ -768,6 +805,18 @@
             <p><strong>Verktøy:</strong> VS Code + GitHub Copilot (Claude)</p>
             <p><strong>Teknisk løsning:</strong> Hele presentasjonen er én HTML-fil med inline CSS og JavaScript. Ingen avhengigheter. Hostet på Schibsted GitHub Enterprise Pages.</p>
           </details>
+        </section>
+
+        <section class="page big-title">
+          <header>
+            <h1>Fra regneark til integrasjon</h1>
+            <p class="subtitle">Inline HTML i mm.schibsted.media</p>
+          </header>
+          <div class="list">
+            <p class="note">Problem: Vi får ofte tabeller/oversikter som skjermdump eller regneark.</p>
+            <p><strong>Inline HTML</strong> betyr at vi skriver/genererer ren HTML-kode (f.eks. en tabell med <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>) som kan limes direkte inn i et CMS-felt — uten eget repo, hosting eller byggsteg.</p>
+            <p><strong>Arbeidsflyt:</strong> Skjermdump/regneark → KI strukturerer innholdet → HTML genereres → HTML limes inn i mm.schibsted.media → mm.schibsted.media renderer dette som en integrasjon som kan brukes i saken.</p>
+          </div>
         </section>
             </div>
 
@@ -889,6 +938,226 @@
         setMode(readMode());
         setModeLabel();
         show(index);
+      })();
+    </script>
+
+    <script>
+      (function initStrandWidgets() {
+        const widgets = document.querySelectorAll('.strand-widget');
+        const formatter = new Intl.NumberFormat('nb-NO');
+
+        const CONFIG = {
+          chartWidth: 640,
+          chartHeight: 180,
+          padding: { top: 20, bottom: 30, left: 20, right: 20 }
+        };
+
+        widgets.forEach((widget) => setupWidget(widget));
+
+        function setupWidget(root) {
+          const els = {
+            counter: root.querySelector('[data-js="counter"]'),
+            caption: root.querySelector('[data-js="caption"]'),
+            source: root.querySelector('[data-js="source"]'),
+            chartWrap: root.querySelector('[data-js="chart-wrap"]'),
+            chartLine: root.querySelector('[data-js="chart-line"]'),
+            chartMarker: root.querySelector('[data-js="chart-marker"]'),
+            gridGroup: root.querySelector('[data-js="grid-group"]'),
+            labelsGroup: root.querySelector('[data-js="labels-group"]'),
+            srText: root.querySelector('[data-js="sr-text"]')
+          };
+
+          const rawSeries = root.dataset.series || '';
+          const rawLabels = root.dataset.labels || '';
+          const series = rawSeries.split(',').map((n) => Number(n.trim()));
+          const labels = rawLabels.split(',').map((s) => s.trim());
+          const duration = Number(root.dataset.duration || 2000);
+
+          if (series.length < 2) return;
+
+          const startVal = series[0];
+          const endVal = series[series.length - 1];
+
+          if (els.caption) els.caption.textContent = root.dataset.caption;
+          if (els.source) els.source.textContent = root.dataset.source;
+
+          if (els.srText) {
+            els.srText.textContent = `${root.dataset.caption}: Økning fra ${formatter.format(startVal)} (${labels[0]}) til ${formatter.format(endVal)} (${labels[labels.length - 1]}).`;
+          }
+
+          const chartData = buildChartPath(series, CONFIG);
+          if (els.chartLine) els.chartLine.setAttribute('d', chartData.pathString);
+
+          drawGrid(els.gridGroup, CONFIG);
+          drawLabels(els.labelsGroup, chartData.points, labels, series, CONFIG);
+
+          const totalLength = els.chartLine.getTotalLength();
+          els.chartLine.style.strokeDasharray = totalLength;
+          els.chartLine.style.strokeDashoffset = totalLength;
+
+          if (chartData.points.length > 0) {
+            const first = chartData.points[0];
+            els.chartMarker.setAttribute('cx', first.x);
+            els.chartMarker.setAttribute('cy', first.y);
+          }
+
+          els.chartWrap.classList.add('is-ready');
+
+          let hasAnimated = false;
+
+          const animate = () => {
+            if (hasAnimated) return;
+            hasAnimated = true;
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) {
+              els.counter.textContent = formatter.format(endVal);
+              els.chartLine.style.strokeDashoffset = 0;
+              const last = chartData.points[chartData.points.length - 1];
+              els.chartMarker.setAttribute('cx', last.x);
+              els.chartMarker.setAttribute('cy', last.y);
+              return;
+            }
+
+            const startTime = performance.now();
+
+            const tick = (now) => {
+              const progress = Math.min((now - startTime) / duration, 1);
+              const ease = 1 - Math.pow(1 - progress, 3);
+
+              const currentVal = Math.round(startVal + (endVal - startVal) * ease);
+              els.counter.textContent = formatter.format(currentVal);
+
+              els.chartLine.style.strokeDashoffset = totalLength * (1 - ease);
+
+              const pointIndex = ease * (chartData.points.length - 1);
+              const i = Math.floor(pointIndex);
+              const t = pointIndex - i;
+
+              const p0 = chartData.points[Math.min(i, chartData.points.length - 1)];
+              const p1 = chartData.points[Math.min(i + 1, chartData.points.length - 1)];
+
+              if (p0 && p1) {
+                const x = p0.x + (p1.x - p0.x) * t;
+                const y = p0.y + (p1.y - p0.y) * t;
+                els.chartMarker.setAttribute('cx', x);
+                els.chartMarker.setAttribute('cy', y);
+              }
+
+              if (progress < 1) {
+                requestAnimationFrame(tick);
+              } else {
+                els.counter.textContent = formatter.format(endVal);
+                els.counter.removeAttribute('aria-hidden');
+              }
+            };
+
+            requestAnimationFrame(tick);
+          };
+
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(
+              (entries) => {
+                if (entries[0].isIntersecting) {
+                  animate();
+                  observer.disconnect();
+                }
+              },
+              { threshold: 0.3 }
+            );
+            observer.observe(root);
+          } else {
+            animate();
+          }
+        }
+
+        function buildChartPath(values, conf) {
+          const min = Math.min(...values);
+          const max = Math.max(...values);
+          const range = max - min || 1;
+          const paddedMin = min - range * 0.1;
+          const paddedMax = max + range * 0.1;
+
+          const innerW = conf.chartWidth - conf.padding.left - conf.padding.right;
+          const innerH = conf.chartHeight - conf.padding.top - conf.padding.bottom;
+
+          const points = values.map((val, i) => {
+            const x = conf.padding.left + (i / (values.length - 1)) * innerW;
+            const normalizedVal = (val - paddedMin) / (paddedMax - paddedMin);
+            const y = conf.padding.top + innerH - normalizedVal * innerH;
+            return { x, y };
+          });
+
+          const pathString = points
+            .map((p, i) => (i === 0 ? 'M' : 'L') + `${p.x.toFixed(1)},${p.y.toFixed(1)}`)
+            .join(' ');
+
+          return { points, pathString };
+        }
+
+        function drawGrid(group, conf) {
+          if (!group) return;
+          const lines = 3;
+          const innerH = conf.chartHeight - conf.padding.top - conf.padding.bottom;
+
+          for (let i = 0; i <= lines; i++) {
+            const y = conf.padding.top + (i / lines) * innerH;
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', conf.padding.left);
+            line.setAttribute('x2', conf.chartWidth - conf.padding.right);
+            line.setAttribute('y1', y);
+            line.setAttribute('y2', y);
+            line.setAttribute('stroke', 'rgba(255,255,255,0.1)');
+            line.setAttribute('stroke-width', '1');
+            group.appendChild(line);
+          }
+        }
+
+        function drawLabels(group, points, labels, values, conf) {
+          if (!group || points.length < 2) return;
+
+          const bottomY = conf.chartHeight - 10;
+
+          const createEndpoint = (point, year, numVal, align) => {
+            const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dot.setAttribute('cx', point.x);
+            dot.setAttribute('cy', point.y);
+            dot.setAttribute('r', 3);
+            dot.setAttribute('fill', '#fff');
+            group.appendChild(dot);
+
+            const yearText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            yearText.setAttribute('fill', 'rgba(255,255,255,0.7)');
+            yearText.setAttribute('font-size', '12');
+            yearText.setAttribute('font-family', 'inherit');
+            yearText.setAttribute('text-anchor', align);
+            yearText.setAttribute('x', point.x);
+            yearText.setAttribute('y', bottomY);
+            yearText.textContent = year;
+            group.appendChild(yearText);
+
+            const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            valueText.setAttribute('fill', 'rgba(255,255,255,0.92)');
+            valueText.setAttribute('font-size', '12');
+            valueText.setAttribute('font-family', 'inherit');
+            valueText.setAttribute('text-anchor', align);
+            valueText.setAttribute('stroke', 'rgba(10,30,54,0.7)');
+            valueText.setAttribute('stroke-width', '4');
+            valueText.setAttribute('paint-order', 'stroke');
+            valueText.setAttribute('stroke-linejoin', 'round');
+
+            const xOffset = align === 'start' ? 10 : -10;
+            const desiredY = point.y - 12;
+            const y = desiredY < conf.padding.top + 10 ? point.y + 18 : desiredY;
+            valueText.setAttribute('x', point.x + xOffset);
+            valueText.setAttribute('y', y);
+            valueText.textContent = formatter.format(numVal);
+            group.appendChild(valueText);
+          };
+
+          createEndpoint(points[0], labels[0], values[0], 'start');
+          createEndpoint(points[points.length - 1], labels[labels.length - 1], values[values.length - 1], 'end');
+        }
       })();
     </script>
   </body>
