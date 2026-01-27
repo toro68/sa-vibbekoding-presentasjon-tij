@@ -494,10 +494,10 @@
           <option value="11">12. Brønnøysund-data</option>
           <option value="12">13. Egen transkribent</option>
           <option value="13">14. Dagsorden-bot</option>
-          <option value="14">15. Hvilke verktøy?</option>
-          <option value="15">16. Vibbekoding (Tenor)</option>
-          <option value="16">17. Rutekutt</option>
-          <option value="17">18. Fra regneark til integrasjon</option>
+          <option value="14">15. Vibbekoding (Tenor)</option>
+          <option value="15">16. Rutekutt</option>
+          <option value="16">17. Fra regneark til integrasjon</option>
+          <option value="17">18. Hvilke verktøy?</option>
         </select>
       </div>
 
@@ -536,10 +536,7 @@
           </header>
           <div class="list">
             <img class="illustration" src="entur.png" alt="Forsinkede busser" />
-            <p><a href="https://aftenbladet-editorial-sa-entur-tij.pages.schibsted.ghe.com/"
-  target="_blank" rel="noopener">https://aftenbladet-editorial-sa-entur-
-  tij.pages.schibsted.ghe.com/</a></p>
-            <p><a href="https://editorial.aftenbladet.no/2026/sa-entur-delays/index.html" target="_blank" rel="noopener">https://editorial.aftenbladet.no/2026/sa-entur-delays/index.html</a></p>
+            <p><a href="https://editorial.aftenbladet.no/2026/sa-entur-delays/index.html" target="_blank" rel="noopener">https://editorial.aftenbladet.no/2026/sa-entur-delays/index.html</a> <small>(passordbeskyttet)</small></p>
           </div>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
@@ -798,29 +795,6 @@
         </section>
 
 
-        <section class="page">
-          <header>
-            <h1>Hvilke verktøy?</h1>
-            <p class="subtitle">Praktisk oppsett</p>
-          </header>
-          <div class="list">
-            <ul>
-              <li><strong>Editor:</strong> Visual Studio Code</li>
-              <li><strong>KI-assistent:</strong> GitHub Copilot / Claude / Gemini (avhengig av tilgang)</li>
-              <li><strong>Versjonskontroll:</strong> Git</li>
-              <li><strong>Repo/hosting:</strong> GitHub / Schibsted GHE Pages (statisk HTML)</li>
-              <li><strong>Publisering i saker:</strong> <span title="mm.schibsted.media">mm.schibsted.media</span> (inline HTML + embed-koder)</li>
-              <li><strong>Visualisering:</strong> Mapcreator, Datawrapper, Leaflet</li>
-              <li><strong>Data/klipp og lim:</strong> Regneark (Excel/Google Sheets), CSV/JSON</li>
-              <li><strong>Automatisering:</strong> Python-scripts + cron (lokalt eller via Actions)</li>
-              <li><strong>Deling/varsling:</strong> Slack (incoming webhook / app)</li>
-            </ul>
-          </div>
-          <details class="how-made">
-            <summary>🛠️ Slik ble denne siden laget</summary>
-            <p><strong>Teknisk løsning:</strong> Samme prinsipp som resten av decket: én statisk HTML-fil med inline CSS/JS, og bilder/illustrasjoner lagt ved i repoet.</p>
-          </details>
-        </section>
 
         <section class="page">
           <header>
@@ -893,6 +867,33 @@
             </div>
 
     </div>
+
+        <section class="page">
+          <header>
+            <h1>Hvilke verktøy?</h1>
+            <p class="subtitle">Praktisk oppsett</p>
+          </header>
+          <div class="list">
+            <ul>
+              <li><strong>Editor:</strong> Visual Studio Code</li>
+              <li><strong>KI-assistent:</strong> GitHub Copilot / Claude / Gemini (avhengig av tilgang)</li>
+              <li><strong>Versjonskontroll:</strong> Git</li>
+              <li><strong>Repo/hosting:</strong> GitHub / Schibsted GHE Pages (statisk HTML)</li>
+              <li><strong>Publisering i saker:</strong> <span title="mm.schibsted.media">mm.schibsted.media</span> (inline HTML + embed-koder)</li>
+              <li><strong>Visualisering:</strong> Mapcreator, Datawrapper, Leaflet</li>
+              <li><strong>Data/klipp og lim:</strong> Regneark (Excel/Google Sheets), CSV/JSON</li>
+              <li><strong>Tilgang til KI-modeller:</strong> LiteLLM (open-source Python-bibliotek som gir en felles API for LLM-er)</li>
+              <li><strong>Slack:</strong> <code>#liteLLM</code> – be om tilgang (P.T. ca 170 i kanalen)</li>
+              <li><strong>Automatisering:</strong> Python-scripts + cron (lokalt eller via Actions)</li>
+              <li><strong>Deling/varsling:</strong> Slack (incoming webhook / app)</li>
+            </ul>
+          </div>
+          <details class="how-made">
+            <summary>🛠️ Slik ble denne siden laget</summary>
+            <p><strong>Teknisk løsning:</strong> Samme prinsipp som resten av decket: én statisk HTML-fil med inline CSS/JS, og bilder/illustrasjoner lagt ved i repoet.</p>
+          </details>
+        </section>
+
     <script>
       (function(){
         const pages = Array.from(document.querySelectorAll('.page'));
