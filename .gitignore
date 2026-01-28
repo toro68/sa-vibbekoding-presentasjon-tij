@@ -1,0 +1,11 @@
+.DS_Store
+*.pyc
+__pycache__/
+
+# Virtualenvs
+.venv/
+venv/
+
+# Generated artifacts
+*.pptx
+
