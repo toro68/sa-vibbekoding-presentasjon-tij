@@ -12,6 +12,7 @@
         --border:#d9e2ef;
         --card:#f7f9fc;
         --link:#0a5bd3;
+        --scroll-offset: 96px;
       }
       body{
         margin:0;
@@ -21,41 +22,23 @@
         color:var(--text);
         line-height:1.5;
       }
-      body.deck-mode{
-        overflow: hidden;
-      }
       .wrap{
         max-width: 980px;
         margin: 0 auto;
         padding: 20px 16px 56px;
-      }
-      body.deck-mode .wrap{
-        max-width: none;
-        padding: 0;
       }
       header{
         padding: 8px 0 14px;
         border-bottom: 1px solid var(--border);
         margin-bottom: 18px;
       }
-      body.deck-mode header{
-        padding: 0 0 18px;
-        margin-bottom: 22px;
-      }
       h1{
         font-size: 22px;
         margin: 0 0 6px;
         letter-spacing: .2px;
       }
-      body.deck-mode h1{
-        font-size: clamp(32px, 3.2vw, 56px);
-        line-height: 1.12;
-      }
       .intro h1{
         font-size: 40px;
-      }
-      body.deck-mode .intro h1{
-        font-size: clamp(44px, 4vw, 64px);
       }
       .intro h2{
         font-size: 26px;
@@ -65,18 +48,11 @@
         line-height: 1.6;
         margin: 0 0 12px;
       }
-      body.deck-mode .intro .lead{
-        font-size: clamp(24px, 2.2vw, 38px);
-        line-height: 1.35;
-      }
       .intro .lead + .note{
         font-size: 20px;
       }
       .big-title h1{
         font-size: 32px;
-      }
-      body.deck-mode .big-title h1{
-        font-size: clamp(34px, 3.2vw, 60px);
       }
       .big-title .subtitle{
         font-size: 18px;
@@ -90,16 +66,9 @@
         color: var(--muted);
         font-size: 14px;
       }
-      body.deck-mode .subtitle{
-        font-size: clamp(16px, 1.4vw, 22px);
-      }
       h2{
         font-size: 18px;
         margin: 22px 0 10px;
-      }
-      body.deck-mode h2{
-        font-size: clamp(22px, 2vw, 34px);
-        margin: 26px 0 14px;
       }
       .grid{
         display:grid;
@@ -135,25 +104,41 @@
         font-size: 13px;
         margin: 6px 0 0;
       }
-      body.deck-mode .note,
-      body.deck-mode .meta,
-      body.deck-mode .pager .count{
-        font-size: clamp(14px, 1.2vw, 18px);
-      }
       .section{
         margin-top: 22px;
         padding-top: 10px;
         border-top: 1px solid var(--border);
+      }
+
+      .page{
+        scroll-margin-top: var(--scroll-offset);
+      }
+
+      .page + .page{
+        margin-top: 28px;
+        padding-top: 22px;
+        border-top: 3px solid rgba(10, 91, 211, 0.22);
+        box-shadow: 0 -10px 0 rgba(10, 91, 211, 0.04);
+      }
+
+      .page.is-active > header{
+        background: linear-gradient(90deg, rgba(10, 91, 211, 0.08), rgba(10, 91, 211, 0));
+        border-radius: 10px;
+        padding: 8px 10px;
+        margin-left: -10px;
+        margin-right: -10px;
+        animation: page-focus 0.5s ease-out;
+      }
+
+      @keyframes page-focus{
+        0%{ box-shadow: 0 0 0 rgba(10, 91, 211, 0.0); }
+        100%{ box-shadow: 0 0 0 rgba(10, 91, 211, 0.0); }
       }
       .list{
         border: 1px solid var(--border);
         border-radius: 12px;
         padding: 14px;
         background: #fff;
-      }
-      body.deck-mode .list{
-        padding: clamp(18px, 2vw, 28px);
-        border-radius: 16px;
       }
       .day{
         margin: 14px 0 6px;
@@ -183,66 +168,11 @@
         border: 1px solid var(--border);
         background: #fff;
       }
-      body.deck-mode .illustration{
-        max-width: none;
-        margin: 18px 0 12px;
-      }
       .deck{
         position: relative;
       }
-      body.deck-mode .deck{
-        display: grid;
-        place-items: center;
-        min-height: 100vh;
-        padding: 72px 0 0;
-        box-sizing: border-box;
-      }
       .page{
-        display: none;
         animation: fade .18s ease-in-out;
-      }
-      .page.active{
-        display: block;
-      }
-      body.deck-mode .page{
-        display: none;
-        width: min(96vw, calc(96vh * 16 / 9));
-        aspect-ratio: 16 / 9;
-        overflow: hidden;
-      }
-      body.deck-mode .page.active{
-        display: block;
-      }
-      body.deck-mode .page > header,
-      body.deck-mode .page > .section,
-      body.deck-mode .page > .list{
-        padding-left: clamp(24px, 3vw, 56px);
-        padding-right: clamp(24px, 3vw, 56px);
-      }
-      body.deck-mode .page > header{
-        padding-top: clamp(24px, 3vw, 48px);
-      }
-      body.deck-mode .page > .section,
-      body.deck-mode .page > .list{
-        padding-bottom: clamp(18px, 2.4vw, 42px);
-      }
-      body.deck-mode .page{
-        display: none;
-        grid-template-rows: auto 1fr;
-      }
-      body.deck-mode .page.active{
-        display: grid;
-      }
-      body.deck-mode .page .list{
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
-      }
-      body.deck-mode .page .list ul{
-        margin-left: 24px;
-      }
-      body.deck-mode .intro{
-        min-height: auto;
       }
       .pager{
         position: sticky;
@@ -256,14 +186,6 @@
         border-bottom: 1px solid var(--border);
         margin-bottom: 16px;
       }
-      body.deck-mode .pager{
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        padding: 10px 16px;
-        margin-bottom: 0;
-      }
       .pager button{
         appearance: none;
         border: 1px solid var(--border);
@@ -273,10 +195,6 @@
         border-radius: 8px;
         font-size: 14px;
         cursor: pointer;
-      }
-      body.deck-mode .pager button{
-        font-size: 16px;
-        padding: 8px 14px;
       }
       .pager button:disabled{
         opacity: .5;
@@ -354,9 +272,6 @@
         margin: 8px 0;
         font-style: italic;
       }
-      body.deck-mode .how-made{
-        display: none;
-      }
       .page-select{
         appearance: none;
         border: 1px solid var(--border);
@@ -368,11 +283,7 @@
         cursor: pointer;
         min-width: 180px;
       }
-      body.deck-mode .page-select{
-        font-size: 16px;
-        padding: 8px 32px 8px 14px;
-        min-width: 200px;
-      }
+
       .page-select:focus{
         outline: 2px solid var(--link);
         outline-offset: 1px;
@@ -485,7 +396,7 @@
   <body>
     <div class="wrap">
       <div class="pager" aria-live="polite">
-        <button type="button" id="prevBtn">Forrige</button>
+        <button type="button" id="prevBtn">Tilbake</button>
         <button type="button" id="nextBtn">Neste</button>
         <select id="pageSelect" class="page-select" aria-label="Velg side">
           <option value="0">1. Hva er «vibe coding»?</option>
@@ -526,12 +437,55 @@
             <h2>Konseptet med vibbekoding er enkelt:</h2>
             <div class="list">
               <p class="lead">Du lar KI-en være utvikler, og kode for deg</p>
-              <p class="note">Inspirert av Viking: Lag gull konfetti som drysser</p>
             </div>
           </div>
+
+          <details class="how-made">
+            <summary>💡 Litt mer om «vibe coding»</summary>
+            <p><strong>Hvor kommer begrepet fra?</strong></p>
+            <p>Andrej Karpathy (tidligere AI-sjef i Tesla, nå OpenAI) lanserte begrepet i februar 2024. Han beskrev det som å «gi seg helt hen til vibben» – å la KI-en kode mens du styrer retningen.</p>
+
+            <p><strong>Før / etter (forenklet):</strong></p>
+            <div style="overflow-x:auto">
+              <table style="width:100%; border-collapse: collapse">
+                <thead>
+                  <tr>
+                    <th style="text-align:left; padding:8px; border-bottom:1px solid var(--border)">Tradisjonell</th>
+                    <th style="text-align:left; padding:8px; border-bottom:1px solid var(--border)">Vibe coding</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="vertical-align:top; padding:8px; border-bottom:1px solid var(--border)">Du skriver kode linje for linje</td>
+                    <td style="vertical-align:top; padding:8px; border-bottom:1px solid var(--border)">Du beskriver hva du vil oppnå</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top; padding:8px; border-bottom:1px solid var(--border)">Du debugger selv</td>
+                    <td style="vertical-align:top; padding:8px; border-bottom:1px solid var(--border)">Du ber KI-en fikse feil</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top; padding:8px; border-bottom:1px solid var(--border)">Timer brukes på syntaks</td>
+                    <td style="vertical-align:top; padding:8px; border-bottom:1px solid var(--border)">Timer brukes på å formulere gode prompts</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top; padding:8px">Én løsning om gangen</td>
+                    <td style="vertical-align:top; padding:8px">Raske iterasjoner, flere forsøk</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p><strong>Poenget er ikke å slutte å tenke – men å flytte innsatsen:</strong></p>
+            <ul>
+              <li>Fra hvordan til hva</li>
+              <li>Fra implementasjon til tydelige mål og god kontekst</li>
+              <li>Fra perfeksjon første forsøk til raske iterasjoner</li>
+            </ul>
+          </details>
           <details class="how-made">
             <summary>🛠️ Slik ble denne siden laget</summary>
             <p><strong>Effekt:</strong> Gull konfetti som drysser ned</p>
+            <p class="note">Kontekst: Gull konfetti var en løsning Bergens Tidende hadde klar, som Aftenbladet tok i bruk da Viking lå an til å bli seriemestere 2025.</p>
             <p><strong>Prompt:</strong></p>
             <div class="prompt">«Lag gull konfetti som drysser ned over siden»</div>
             <p><strong>Teknisk løsning:</strong> CSS-animasjon med <code>@keyframes</code>. 13 <code>&lt;span&gt;</code>-elementer med ulik <code>animation-delay</code> og <code>left</code>-posisjon. Animasjonen roterer og flytter elementene nedover med <code>translateY</code>.</p>
@@ -554,7 +508,7 @@
             <p><strong>Slack-melding fra Andreas:</strong></p>
             <div class="prompt">«Hadde det vært en idé å vibekode et verktøy (for intern bruk) som, basert på sanntidsdata fra Kolumbus, viser oss en liste over de bussene som er mest forsinket for øyeblikket? Kunne vært en god måte å følge med på hvilke strekninger det er trøbbel på.»</div>
             <p><strong>Data:</strong> Entur API (sanntidsdata for kollektivtrafikk)</p>
-            <p><strong>Teknisk løsning:</strong> Henter data fra Entur, filtrerer på forsinkelser, og viser i en enkel oversikt. Hostet på GitHub Pages.</p>
+            <p><strong>Teknisk løsning:</strong> Henter data fra Entur, filtrerer på forsinkelser, og viser i en enkel oversikt.</p>
           </details>
         </section>
 
@@ -575,6 +529,7 @@
             <p><strong>Sak:</strong> <a href="https://www.aftenbladet.no/okonomi/i/OkQEjq/sjekk-restaurantregnskapene-i-stavanger-og-sandnes" target="_blank" rel="noopener">Sulten på suksess</a></p>
             <p><strong>Data:</strong> Brønnøysundregistrene (NACE-koder for serveringssteder)</p>
             <p><strong>Teknisk løsning:</strong> Inline HTML-widget (CSS + JS) limt inn i mm.schibsted.media. Data hentes ut fra Brønnøysund, filtreres (kommune/næringskode) og legges inn som JSON i integrasjonen. JS bygger UI-et (søk, kommune-filter, topp-5) og rendrer lista med <code>&lt;details&gt;</code>-elementer.</p>
+            <p class="note"><strong>OBS (ytelse):</strong> Denne modellen laster hele datasettet som JSON i nettleseren og bygger UI-et med JavaScript. Det kan gi treg side (stor nedlasting + mye JS-jobbing), spesielt på mobil. En mer robust løsning er å flytte databehandling til en liten backend som cacher og serverer paginerte/filtrerte svar via API, slik at klienten kun henter det som trengs.</p>
           </details>
         </section>
 
@@ -596,6 +551,7 @@
             <p><strong>Sak:</strong> <a href="https://www.aftenbladet.no/lokalt/i/aJPKOE/jette-bjorland-erling-braut-haaland-bestilte-to-porsjoner-kjoettkaker" target="_blank" rel="noopener">Salget av kjøttkaker eksploderte etter at Haaland var innom kafeen</a></p>
             <p><strong>Data:</strong> Brønnøysundregistrene (NACE-koder for serveringssteder)</p>
             <p><strong>Teknisk løsning:</strong> Uthenting av bransjedata, filtrert på kommuner og næringskoder. Inline HTML i mm.schibsted.media.</p>
+            <p class="note"><strong>OBS (ytelse):</strong> Denne modellen laster hele datasettet som JSON i nettleseren og bygger UI-et med JavaScript. Det kan gi treg side (stor nedlasting + mye JS-jobbing), spesielt på mobil. En mer robust løsning er å flytte databehandling til en liten backend som cacher og serverer paginerte/filtrerte svar via API, slik at klienten kun henter det som trengs.</p>
           </details>
         </section>
 
@@ -607,6 +563,7 @@
           <div class="list">
             <p class="note">Forklarer gjenstående biler med visuelt grep.</p>
             <img class="illustration" src="vassoy.png" alt="Oversitting på Vassøy-ferja" />
+            <img class="illustration" src="vassoy2.png" alt="Oversitting på Vassøy-ferja (eksempel 2)" loading="lazy" />
             <p class="note">Løsning:</p>
             <p><a href="https://api.schibsted.tech/proxy/content/v3/publication/sa/multimedias/4b77319f-3fb6-4ee5-b435-6480bca79e34/Oversikt%3A%20Vass%C3%B8y%20-%20oversitting"
   target="_blank" rel="noopener">
@@ -844,7 +801,7 @@
             <p><strong>2) Kilde:</strong> Finn en enkel kilde (CSV/regneark, API, embedkode eller skjermdump).</p>
             <p><strong>3) Prompt:</strong> Beskriv ønsket resultat i klart språk (målgruppe, mobilvisning, hva som er viktigst, og hvilke felter som skal vises).</p>
             <p><strong>4) Generer:</strong> Be KI-en lage HTML/CSS/JS (helst mobile-first) og pakke alt i én embed som ikke kolliderer med resten av siden.</p>
-            <p><strong>5) Lim inn:</strong> Bruk enten embed-kode fra et verktøy (Mapcreator/Datawrapper) eller inline HTML i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
+            <p><strong>5) Lim inn:</strong> Lim inline HTML inn i <span title="mm.schibsted.media">mm.schibsted.media</span>, på samme måte som du gjør med embedkode fra Datawrapper, etc.</p>
             <p><strong>6) Sjekk:</strong> Test i Chrome/Safari, sjekk æ/ø/å, og pass på at det ikke blir scroll-trap eller tregt på mobil.</p>
             <p><strong>7) Iterer:</strong> “Casino-knappen” er at du sitter og trykker «godkjenn» når Codex/Gemini/Claude spør — små endringer og rask feedback helt til det sitter.</p>
           </details>
@@ -859,9 +816,9 @@
           <div class="list">
             <img src="embed.png" alt="Illustrasjon: embedkode" style="width:100%;border-radius:6px" />
             <p><strong>Embed → integrasjon:</strong> Vi kan hente embed-kode fra Mapcreator, Datawrapper og andre verktøy og lime den inn i <span title="mm.schibsted.media">mm.schibsted.media</span> for å lage en integrasjon.</p>
-            <p class="note">Problem: Vi får ofte tabeller/oversikter som skjermdump eller regneark.</p>
+            <p class="note"></p>
             <img src="inline.png" alt="Illustrasjon: inline HTML" style="width:100%;border-radius:6px" />
-            <p><strong>…eller lage koden selv:</strong> Med inline HTML kan vi skrive/generere koden selv og lime den inn direkte i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
+            <p><strong>…eller lage koden selv når vi får et regneark, etc.:</strong> Med inline HTML kan vi skrive/generere koden selv og lime den inn direkte i <span title="mm.schibsted.media">mm.schibsted.media</span>.</p>
             <p><strong>Teknisk:</strong> Integrasjoner i <span title="mm.schibsted.media">mm.schibsted.media</span> kan være embedkode fra Mapcreator/Datawrapper m.fl., eller KI-generert inline HTML. Bygg mobile-first, hold deg til Aftenbladets blå profil, og pass på støtte for æ/ø/å.</p>
             <p><strong>Inline HTML</strong> betyr at vi skriver/genererer ren HTML-kode (f.eks. en tabell med <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>) som kan limes direkte inn i et CMS-felt — uten eget repo, hosting eller byggsteg.</p>
             <p><strong>Arbeidsflyt:</strong> Skjermdump/regneark → KI strukturerer innholdet → HTML genereres → HTML limes inn i mm.schibsted.media → mm.schibsted.media renderer dette som en integrasjon som kan brukes i saken.</p>
@@ -889,7 +846,6 @@
               <li><strong>Versjonskontroll:</strong> Git</li>
               <li><strong>Repo/hosting:</strong> GitHub / Schibsted GHE Pages (statisk HTML)</li>
               <li><strong>Publisering i saker:</strong> <span title="mm.schibsted.media">mm.schibsted.media</span> (inline HTML + embed-koder)</li>
-              <li><strong>Visualisering:</strong> Mapcreator, Datawrapper, Leaflet</li>
               <li><strong>Data/klipp og lim:</strong> Regneark (Excel/Google Sheets), CSV/JSON</li>
               <li><strong>Tilgang til KI-modeller:</strong> LiteLLM (open-source Python-bibliotek som gir en felles API for LLM-er)</li>
               <li><strong>Slack:</strong> <code>#liteLLM</code> – be om tilgang (P.T. ca 170 i kanalen)</li>
@@ -1453,65 +1409,68 @@
     <script>
       (function(){
         const pages = Array.from(document.querySelectorAll('.page'));
+        const pageSelect = document.getElementById('pageSelect');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const modeBtn = null;
-        const pageSelect = document.getElementById('pageSelect');
+        const pager = document.querySelector('.pager');
 
-        const params = new URLSearchParams(window.location.search);
         let index = 0;
-        
-        // Read initial page from URL or localStorage
-        if (params.has('side')) {
-          const pageNum = parseInt(params.get('side'), 10);
-          if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= pages.length) {
-            index = pageNum - 1;
-          }
-        } else {
-          try {
-            const stored = localStorage.getItem('sa-pptx:page');
-            if (stored !== null) {
-              const storedIndex = parseInt(stored, 10);
-              if (!isNaN(storedIndex) && storedIndex >= 0 && storedIndex < pages.length) {
-                index = storedIndex;
-              }
-            }
-          } catch (e) {}
+
+        function getScrollOffset() {
+          const pagerHeight = pager ? pager.getBoundingClientRect().height : 0;
+          const offset = Math.ceil(pagerHeight + 12);
+          document.documentElement.style.setProperty('--scroll-offset', `${offset}px`);
+          return offset;
         }
 
-        function setModeLabel(){}
-
-        function setMode(enabled){}
-
-        function readMode(){
-          return false;
+        function scrollToPage(index) {
+          const page = pages[index];
+          if (!page) return;
+          const offset = getScrollOffset();
+          const target = page.querySelector('header') || page;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
 
-        function show(i){
+        function setActive(i) {
           index = Math.max(0, Math.min(i, pages.length - 1));
-          pages.forEach((p, idx) => p.classList.toggle('active', idx === index));
-          prevBtn.disabled = index === 0;
-          nextBtn.disabled = index === pages.length - 1;
-          pageSelect.value = index;
-          
-          // Save to localStorage
-          try {
-            localStorage.setItem('sa-pptx:page', index);
-          } catch (e) {}
-          
-          // Update URL without reload
-          const url = new URL(window.location);
-          url.searchParams.set('side', index + 1);
-          window.history.replaceState({}, '', url);
-          
-          if (!document.body.classList.contains('deck-mode')) {
-            window.scrollTo({ top: 0, behavior: 'instant' });
+          pageSelect.value = String(index);
+          if (prevBtn) prevBtn.disabled = index === 0;
+          if (nextBtn) nextBtn.disabled = index === pages.length - 1;
+          pages.forEach((page, i) => page.classList.toggle('is-active', i === index));
+          scrollToPage(index);
+        }
+
+        function updateActiveFromScroll() {
+          const viewportTop = window.scrollY;
+          const offset = getScrollOffset() + 6;
+          let active = 0;
+
+          for (let i = 0; i < pages.length; i++) {
+            if (pages[i].offsetTop - offset <= viewportTop) {
+              active = i;
+            } else {
+              break;
+            }
+          }
+
+          if (active !== index) {
+            index = active;
+            pageSelect.value = String(index);
+            if (prevBtn) prevBtn.disabled = index === 0;
+            if (nextBtn) nextBtn.disabled = index === pages.length - 1;
+            pages.forEach((page, i) => page.classList.toggle('is-active', i === index));
           }
         }
 
-        prevBtn.addEventListener('click', () => show(index - 1));
-        nextBtn.addEventListener('click', () => show(index + 1));
-        pageSelect.addEventListener('change', (e) => show(parseInt(e.target.value, 10)));
+        pageSelect.addEventListener('change', (e) => {
+          const nextIndex = parseInt(e.target.value, 10);
+          if (Number.isNaN(nextIndex)) return;
+          setActive(nextIndex);
+        });
+
+        if (prevBtn) prevBtn.addEventListener('click', () => setActive(index - 1));
+        if (nextBtn) nextBtn.addEventListener('click', () => setActive(index + 1));
 
         document.addEventListener('keydown', (e) => {
           const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
@@ -1519,19 +1478,19 @@
 
           if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
             e.preventDefault();
-            show(index - 1);
+            setActive(index - 1);
           }
           if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
             e.preventDefault();
-            show(index + 1);
+            setActive(index + 1);
           }
           if (e.key === 'Home') {
             e.preventDefault();
-            show(0);
+            setActive(0);
           }
           if (e.key === 'End') {
             e.preventDefault();
-            show(pages.length - 1);
+            setActive(pages.length - 1);
           }
           if (e.key.toLowerCase() === 'f') {
             e.preventDefault();
@@ -1543,7 +1502,10 @@
           }
         });
 
-        show(index);
+        window.addEventListener('scroll', updateActiveFromScroll, { passive: true });
+        getScrollOffset();
+        setActive(0);
+        updateActiveFromScroll();
       })();
     </script>
 
