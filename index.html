@@ -1417,6 +1417,8 @@
         const pager = document.querySelector('.pager');
 
         let index = 0;
+        let isManualNav = false;
+        let manualNavTimeout = null;
 
         function getScrollOffset() {
           const pagerHeight = pager ? pager.getBoundingClientRect().height : 0;
@@ -1440,10 +1442,18 @@
           if (prevBtn) prevBtn.disabled = index === 0;
           if (nextBtn) nextBtn.disabled = index === pages.length - 1;
           pages.forEach((page, i) => page.classList.toggle('is-active', i === index));
+          
+          // Block scroll updates temporarily during manual navigation
+          isManualNav = true;
+          if (manualNavTimeout) clearTimeout(manualNavTimeout);
+          manualNavTimeout = setTimeout(() => { isManualNav = false; }, 800);
+          
           scrollToPage(index);
         }
 
         function updateActiveFromScroll() {
+          if (isManualNav) return; // Don't update during manual navigation
+          
           const viewportTop = window.scrollY;
           const offset = getScrollOffset() + 6;
           let active = 0;
